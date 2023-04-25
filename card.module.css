@@ -1,3 +1,15 @@
+.headCard {
+  /* se irá añadiendo cuando vayamos avanzando */
+}
+
+.cardFin {
+  /*se irá añadiendo cuando vayamos avanzando*/
+}
+
+.gameFinished {
+  /* se irá añadiendo cuando vayamos avanzando */
+}
+
 .card {
   position: absolute;
   width: 693px;
@@ -6,7 +18,7 @@
   top: 354px;
 }
 
-.tittleques {
+.titleQuestion {
   position: absolute;
   top: 0;
   left: 0;
@@ -25,7 +37,7 @@
   color: #000000;
 }
 
-.answerques {
+.answerQuestion {
   position: absolute;
   width: 207px;
   height: 57px;
@@ -46,7 +58,7 @@
   opacity: 0.55;
 }
 
-.answerques2 {
+.answerQuestion2 {
   position: absolute;
   width: 207px;
   height: 57px;
@@ -65,4 +77,12 @@
   color: #0f0d79;
 
   opacity: 0.55;
+}
+
+.difficultyLevel {
+  /* se irá añadiendo cuando vayamos avanzando */
+}
+
+.favoriteAnswer {
+  /* se irá añadiendo cuando vayamos avanzando */
 }
