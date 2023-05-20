@@ -5,7 +5,7 @@ const Difficult = () => {
       <button>Medium</button>
       <button>Hard</button>
       <img
-        src="img/DificultadBaja.png"
+        src="img/PropuestaLogo.png"
         alt="Logo de Benkyo, dificultad baja"
         width="100"
         height="100"
