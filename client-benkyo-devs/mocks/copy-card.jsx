@@ -1,12 +1,6 @@
 import { useState } from "react";
 
 const Card = ({ dato }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleClick = () => {
-    setIsFlipped(!isFlipped);
-  };
-
   return (
     <section>
       <h1>{dato.id}</h1>
@@ -23,8 +17,7 @@ const Card = ({ dato }) => {
       </div>
 
       <button>siguiente Card</button>
-    </section>
+    </>
   );
 };
-
 export default Card;
