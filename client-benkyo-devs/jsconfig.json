@@ -1,7 +1,19 @@
 {
   "compilerOptions": {
     "paths": {
-      "carol-88/*": ["./src/*"]
+      "carol-88/*": ["./src/*"],
+
+      /*
+        Esta alias permite que se pueda importar los componentes de la siguiente manera:
+        import Difficult from "@/components/header/difficult";
+
+        Evitando cosas como:
+        import Difficult from "../../../components/header/difficult";
+        import Difficult from "../header/difficult";
+
+        y otras cosas confusas
+      */
+      "@/components/*": ["./src/components/*"]
     }
   }
 }
