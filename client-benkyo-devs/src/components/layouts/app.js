@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from '@/components/header/Header';
+import Footer from '@/components/footer';
 
 const DEFAULT_SEO = {
   title: 'Benkyo Devs',
@@ -27,11 +28,11 @@ export default function Layout({ seo = DEFAULT_SEO, children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <>
+      <div className="container-sm mx-auto min-h-screen flex flex-col justify-between">
         <Header />
         {children}
-        <footer>//footer</footer>
-      </>
+        <Footer />
+      </div>
     </>
   );
 }
