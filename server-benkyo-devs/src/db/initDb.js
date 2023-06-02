@@ -103,6 +103,21 @@ async function main() {
             );        
         `); 
 
+        console.log('Creando tabla USER_CARD_COUNTER');
+
+        await connection.query(`
+            CREATE table user_card_counter (
+                id int not null auto_increment,
+                easy_counter int unsigned not null,
+                intermidate_counter int unsigned not null,
+                advanced_counter int unsigned not null,
+                id_user int not null,
+                id_card int not null,
+                foreign key(id_user) references user(id),
+                foreign key(id_card) references card(id)
+            );
+        `);
+
     } catch(error) {
         console.error(error);
 

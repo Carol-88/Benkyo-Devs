@@ -1,4 +1,4 @@
-const { listQuestions } = require('../helpers/helpers');
+const { listQuestions } = require('../helpers/getJsonCard');
 const { getCardById } = require('../db/cards');
 
 const getMySQLCardByIdController = async (req, res, next) => {

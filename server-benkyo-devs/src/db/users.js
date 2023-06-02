@@ -1,5 +1,5 @@
 const { getConnection } = require('./db');
-const { generateError } = require('../helpers/helpers');
+const { generateError } = require('../helpers/generateError');
 const bcrypt = require('bcrypt');
 
 const getUserById = async (id) => {
@@ -9,7 +9,7 @@ const getUserById = async (id) => {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `SELECT id, email FROM user WHERE id = ?`,
+            `SELECT id, name, email FROM user WHERE id = ?`,
             [id]
         );
 
@@ -59,6 +59,25 @@ const createUser = async (name, email, password) => {
     }
 };
 
+// const editUser = async (id) => {
+//     let connection;
+        
+//     try { 
+
+//         connection = await getConnection();
+
+//         res.send({
+//             status: 'Ok',
+//             message: `El id del usuario que ha iniciado sesion es ${id}`,
+//         });
+
+//     } catch (error) {
+//         throw generateError('Id de usuario no encontrado', 404)
+//     } finally {
+//         if (connection) connection.release();
+//     }
+// }
+
 const getUserByEmail = async (email) => {
     let connection;
   
@@ -84,5 +103,5 @@ const getUserByEmail = async (email) => {
 
 
 module.exports = {
-    getUserById, createUser, getUserByEmail
+    getUserById, createUser, getUserByEmail,
 };

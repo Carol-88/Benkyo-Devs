@@ -7,47 +7,24 @@ const newUserSchema = Joi.object().keys({
         .min(3)
         .max(30)
         .regex(/[A-Za-z0-9]/)
-        .error((errors) => {
-            if (
-                errors[0].code === 'any.required' ||
-                errors[0].code === 'string.empty'
-            ) {
-                return new Error('¡El nombre es requerido!');
-            } else {
-                return new Error(
-                    '¡El nombre debe tener entre 3 y 30 caracteres de longitud!'
-                );
-            }
+        .error((error) => {
+            //Pendiente
         }),
-    email: Joi.string()
+    email: Joi.email()
         .required()
-        .min(5)
-        .max(15)
-        .error((errors) => {
-            if (
-                errors[0].code === 'any.required' ||
-                errors[0].code === 'string.empty'
-            ) {
-                return new Error('¡El tipo de ejercicio es una propiedad obligatoria!');
-            } else {
-                return new Error(
-                    '¡El tipo de ejercicio debe ser aeróbico o anaeróbico!'
-                );
-            }
+        .error((error) => {
+           //Pendiente
         }),
     passsword: Joi.string()
-        .min(5)
-        .max(500)
-        .error((errors) => {
-            if (errors[0].code === 'string.empty') {
-                return new Error(
-                    '¡No se permite enviar una descripción vacía!'
-                );
-            } else {
-                return new Error(
-                    '¡La descripción debe tener entre 3 y 500 caracteres como máximo!'
-                );
-            }
+        .min(8)
+        .max(30)
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/)
+        .required()
+        .messages({
+            'string.pattern.base': 'La contraseña debe contener al menos una letra mayúscula, otra minúscula, un número, un caracter especial, y una longitud entre 8 y 30 caracteres',
+          })
+        .error((error) => {
+           //Pendiente
         }),
 });
 

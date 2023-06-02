@@ -1,5 +1,5 @@
 const { getConnection } = require('./db');
-const { generateError } = require('../helpers/helpers');
+const { generateError } = require('../helpers/generateError');
 
 const getCardById = async (id) => {
     let connection;
@@ -13,7 +13,7 @@ const getCardById = async (id) => {
         );
 
         if(result.length === 0) {
-            throw generateError('No hay ninguna card con ese id')
+            throw generateError(`Card con id ${id} no encontrada`);
         }
 
         return result[0]
