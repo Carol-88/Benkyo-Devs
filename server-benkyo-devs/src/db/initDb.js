@@ -25,7 +25,9 @@ async function main() {
         await connection.query(`
             CREATE TABLE IF NOT EXISTS user (
                 id int not null auto_increment primary key,
+                username varchar(30) not null,
                 name varchar(50) not null,
+                description varchar (500),
                 avatar varchar(255),
                 email varchar(100) not null,
                 password varchar(255) not null
