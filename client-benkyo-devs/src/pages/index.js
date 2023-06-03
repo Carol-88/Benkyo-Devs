@@ -2,6 +2,7 @@ import Head from "next/head";
 import Header from "../components/header/Header";
 import Card from "carol-88/components/card/Card";
 //import NextCard from "carol-88/components/card/button-next-card/next-card";
+// import Start from "../components/perfil/StartButton";
 
 export default function Home() {
   return (
