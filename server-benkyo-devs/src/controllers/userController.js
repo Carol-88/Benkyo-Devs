@@ -245,6 +245,36 @@ const editPasswordController = async (req, res,next) => {
     }   
 }
 
+const editAvatarController = async (req, res, next) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const idUserAuth = req.userAuth.id;
+
+        if (!req.files || !req.files.avatar) {
+            throw generateError('Debes indicar el nuevo avatar de usuario'), 400;
+        }
+
+        const [user] = await connection.query(
+            `SELECT avatar FROM user WHERE id = ?`,
+            [idUserAuth]
+        );
+
+        if (user[0].avatar) {
+            
+        }
+
+        res.send({
+            status: 'Ok',
+        })
+    } catch (error) {
+        next(error)
+    } finally {
+        if (connection) connection.release()
+    }
+}
 
 
 module.exports = {
@@ -255,4 +285,5 @@ module.exports = {
     editUserInfoController,
     deleteUserController,
     editPasswordController,
+    editAvatarController,
 };

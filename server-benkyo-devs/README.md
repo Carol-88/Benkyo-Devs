@@ -47,7 +47,7 @@ con una respuesta correcta y otra incorrecta.
 - **GET /user/:id** Devuelve información de usuario ✅
 - **PUT /user/edit** Modifica el nombre de usuario y el email de un usuario autentificado ✅
 - **PUT /user/edit** Modifica el nombre y la descripción de un usuario autentificado ✅
-- **PUT /user/password** Modifica la contraseña de un usuario 
+- **PUT /user/password** Modifica la contraseña de un usuario ✅
 - **DELETE /user/delete** Elimina usuario ✅
 - **POST /login**  Login de usuario (devuelve token) ✅
 - **GET /mysql/:id**  Devuelve la tarjeta por id (questions.json)✅
