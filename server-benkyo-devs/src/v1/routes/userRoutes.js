@@ -9,7 +9,9 @@ router
     .post('/login', userController.loginController)
     .put('/edit', userAuth, userController.editUserController)
     .put('/editInfo', userAuth, userController.editUserInfoController)
-    .delete('/delete', userAuth, userController.deleteUserController);
+    .delete('/delete', userAuth, userController.deleteUserController)
+    .put('/editPassword', userAuth, userController.editPasswordController);
+
 
 
 

@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { generateError } = require('../helpers/generateError');
 const { createUser, getUserByEmail, getUserById } = require('../db/users');
+const { userAuth } = require('../../midllewares/userAuth');
 
 const newUserController = async (req, res, next) => {
     try {
@@ -199,6 +200,51 @@ const loginController = async (req, res, next) => {
     } 
 };
 
+const editPasswordController = async (req, res,next) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const idUserAuth = req.userAuth.id;
+
+        const { email, newPass, confirmNewPass } = req.body;
+
+        if (!email || !newPass || !confirmNewPass) {
+            throw generateError('Faltan datos obligatorios', 400);
+        }
+
+        if (newPass !== confirmNewPass) {
+            throw generateError('Las contraseñas no coinciden');
+        }
+
+        const [user] = await connection.query(
+            `SELECT email FROM user WHERE id = ?`,
+            [idUserAuth]
+        );
+
+        if (email !== user[0].email) {
+            throw generateError('El email no coincide con el email del login', 401);
+        }
+
+        const passwordHash = await bcrypt.hash(newPass, 8);
+
+        await connection.query(
+            `UPDATE user SET password = ? WHERE id = ?`,
+            [passwordHash, idUserAuth,]
+        );
+
+        res.send({
+            status: 'ok',
+            message: 'Contraseña modificada con éxito',
+        }); 
+    } catch (error) {
+        next(error);
+    } finally {
+        if (connection) connection.release();
+    }   
+}
+
 
 
 module.exports = {
@@ -208,4 +254,5 @@ module.exports = {
     editUserController,
     editUserInfoController,
     deleteUserController,
+    editPasswordController,
 };
