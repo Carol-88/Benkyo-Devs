@@ -8,7 +8,9 @@ router
     .get('/:id', userController.getUserController)
     .post('/login', userController.loginController)
     .put('/edit', userAuth, userController.editUserController)
-    .put('/editInfo', userAuth, userController.editUserInfoController);
+    .put('/editInfo', userAuth, userController.editUserInfoController)
+    .delete('/delete', userAuth, userController.deleteUserController);
+
 
 
 module.exports = router;

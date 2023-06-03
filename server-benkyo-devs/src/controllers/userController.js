@@ -125,6 +125,47 @@ const editUserInfoController = async (req, res, next) => {
     }
 }
 
+const deleteUserController = async (req, res, next) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const idUserAuth = req.userAuth.id;
+
+        const { password } = req.body;
+
+        if(!password) {
+            throw generateError('Debes introducir la contraseña', 400);
+        }
+
+        const [user] = await connection.query(
+            `SELECT password FROM user WHERE id = ?`,
+            [idUserAuth]
+        );
+
+        const validPassword = await bcrypt.compare(password, user[0].password);
+
+        if (!validPassword) {
+            throw generateError('La contraseña no es válida', 401);
+        }
+
+        await connection.query(
+            `DELETE FROM user WHERE id = ?`,
+            [idUserAuth]
+        );
+
+        res.send({
+            status: 'Ok',
+            message: `Usuario con id ${idUserAuth} eliminado`,
+        })
+    } catch (error) {
+        
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
 const loginController = async (req, res, next) => {
     try {
         const {email, password} = req.body;
@@ -166,4 +207,5 @@ module.exports = {
     loginController,
     editUserController,
     editUserInfoController,
+    deleteUserController,
 };
