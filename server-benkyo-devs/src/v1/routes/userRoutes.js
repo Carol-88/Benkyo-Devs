@@ -7,6 +7,8 @@ router
     .post('/register', userController.newUserController)
     .get('/:id', userController.getUserController)
     .post('/login', userController.loginController)
-    .put('/edit', userAuth, userController.editUserController);
+    .put('/edit', userAuth, userController.editUserController)
+    .put('/editInfo', userAuth, userController.editUserInfoController);
+
 
 module.exports = router;

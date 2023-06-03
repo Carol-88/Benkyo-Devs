@@ -86,6 +86,45 @@ const editUserController = async (req, res, next) => {
     }
 }
 
+const editUserInfoController = async (req, res, next) => {
+    let connection;
+
+    try {
+        connection = await getConnection();
+
+        const idUserAuth = req.userAuth.id;
+
+        const { name, description } = req.body;
+
+        if(!name && !description) {
+            throw generateError('No has modificado nada', 400)
+        }
+
+        const [user] = await connection.query(
+            `SELECT name, description FROM user WHERE id = ?`,
+            [idUserAuth]
+        );
+
+        await connection.query(
+            `UPDATE user SET name = ?, description = ? WHERE id = ?`,
+            [
+                name || user[0].name,
+                description || user[0].description,
+                idUserAuth,
+            ]
+        )
+
+        res.send({
+            status: 'Ok',
+            message: `Usuario con id ${idUserAuth} modificado con éxito`,
+        });
+    } catch (error) {
+        next(error);
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
 const loginController = async (req, res, next) => {
     try {
         const {email, password} = req.body;
@@ -120,9 +159,11 @@ const loginController = async (req, res, next) => {
 };
 
 
+
 module.exports = {
     newUserController,
     getUserController,
     loginController,
     editUserController,
+    editUserInfoController,
 };
