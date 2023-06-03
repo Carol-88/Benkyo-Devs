@@ -6,13 +6,13 @@ const { createUser, getUserByEmail, getUserById } = require('../db/users');
 
 const newUserController = async (req, res, next) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, username, description, email, password } = req.body;
 
-        if(!name || !email || !password) {
+        if(!name || !username || !description || !email || !password) {
             throw generateError('Debes introducir un email y una contraseña válidos', 400);
         }
 
-        const id = await createUser(name, email, password);
+        const id = await createUser(name, username, description, email, password);
 
         console.log(id);
 
@@ -50,31 +50,31 @@ const editUserController = async (req, res, next) => {
     try {
         connection = await getConnection();
 
-        const idUserAuth = req.userId;
+        const idUserAuth = req.userAuth.id;
         
-        const { newName, newEmail } = req.body;
+        const { newUserame, newEmail } = req.body;
         
-        if (!newName && !newEmail) {
+        if (!newUserame && !newEmail) {
             throw generateError('No has modificado nada', 400);
         }
 
         const [user] = await connection.query(
-            `SELECT * FROM user WHERE name = ? OR email = ?`,
-            [newName, newEmail]    
+            `SELECT * FROM user WHERE username = ? OR email = ?`,
+            [newUserame, newEmail]    
         );
 
         if (user.length > 0) {
-            throw new generateError('El email o nombre de usuario no disponible');
+            throw generateError('El email o nombre de usuario no disponible');
         }
 
         const [userAuth] = await connection.query(
-            `SELECT name, email FROM user WHERE id = ?`,
+            `SELECT username, email FROM user WHERE id = ?`,
             [idUserAuth]
         );
 
         await connection.query(
-            `UPDATE user SET name = ?, email = ? WHERE id = ?`,
-            [newEmail || userAuth[0].email, newName || userAuth[0].name, idUserAuth]
+            `UPDATE user SET email = ?, username = ? WHERE id = ?`,
+            [newEmail || userAuth[0].email, newUserame || userAuth[0].username, idUserAuth]
         );
 
         res.send({
@@ -102,20 +102,21 @@ const loginController = async (req, res, next) => {
             throw generateError('Email o contraseña incorrectos', 401);
         }
 
-        const payload = { id: user.id };
+        const tokenInfo = { id: user.id };
 
-        const token = jwt.sign(payload, process.env.SECRET, {
+        const token = jwt.sign(tokenInfo, process.env.SECRET, {
             expiresIn: '30d',
         });
 
         res.send({
             status: 'ok',
-            data: token,
+            message: 'Sesión iniciada con éxito',
+            authToken: token,
         });
 
     } catch(error) {
         next(error);
-    }
+    } 
 };
 
 

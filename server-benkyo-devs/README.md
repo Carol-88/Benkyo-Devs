@@ -45,12 +45,14 @@ con una respuesta correcta y otra incorrecta.
 
 - **POST /user**  Registro de usuario ✅
 - **GET /user/:id** Devuelve información de usuario ✅
-- **PUT /user/edit** Devuelve la informaición del usuario editada 
+- **PUT /user/edit** Modifica el nombre y el email de un usuario autentificado ✅
+- **PUT /user/password** Modifica la contraseña de un usuario
 - **DELETE /user/delete** Elimina usuario 
 - **POST /login**  Login de usuario (devuelve token) ✅
 - **GET /mysql/:id**  Devuelve la tarjeta por id (questions.json)✅
 - **GET /card/:id**  Devuelve la tarjeta por id (questions.json)✅
 - **GET /user/card/:id**  Devuelve todas las tarjetas relacionadas con el usuario 
+- **Get /user/card/level** Devuelve todas las tarjetas de un mismo nivel
 - **POST /deck**  Registra mazo de usuario 
 - **GET /deck/:id**  Devuelve mazo de usuario por id
 

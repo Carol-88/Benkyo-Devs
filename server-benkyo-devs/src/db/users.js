@@ -9,7 +9,7 @@ const getUserById = async (id) => {
         connection = await getConnection();
 
         const [result] = await connection.query(
-            `SELECT id, name, email FROM user WHERE id = ?`,
+            `SELECT id, name, username, description, email FROM user WHERE id = ?`,
             [id]
         );
 
@@ -23,7 +23,7 @@ const getUserById = async (id) => {
     }
 }
 
-const createUser = async (name, email, password) => {
+const createUser = async (name, username, description, email, password) => {
     
     let connection;
 
@@ -48,9 +48,9 @@ const createUser = async (name, email, password) => {
 
         const [newUser] = await connection.query(
             `
-            INSERT INTO user (name, email, password) VALUES (?, ?, ?);
+            INSERT INTO user (name, username, description, email, password) VALUES (?, ?, ?, ?, ?);
             `, 
-            [name, email, passwordHash]
+            [name, username, description, email, passwordHash]
         );
        
         return newUser.insertId;
@@ -58,25 +58,6 @@ const createUser = async (name, email, password) => {
         if(connection) connection.release();
     }
 };
-
-// const editUser = async (id) => {
-//     let connection;
-        
-//     try { 
-
-//         connection = await getConnection();
-
-//         res.send({
-//             status: 'Ok',
-//             message: `El id del usuario que ha iniciado sesion es ${id}`,
-//         });
-
-//     } catch (error) {
-//         throw generateError('Id de usuario no encontrado', 404)
-//     } finally {
-//         if (connection) connection.release();
-//     }
-// }
 
 const getUserByEmail = async (email) => {
     let connection;

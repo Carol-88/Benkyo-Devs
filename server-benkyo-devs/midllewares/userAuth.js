@@ -15,24 +15,26 @@ const userAuth = async (req, res, next) => {
       throw generateError('Header Authorization Missing', 401);
     }
 
-    let token;
+    let tokenInfo;
+    console.log(authorization);
+    console.log(process.env.SECRET);
 
     try {
-      token = jwt.verify(authorization, process.env.SECRET);
+      tokenInfo = jwt.verify(authorization, process.env.SECRET);
     } catch {
       throw generateError('El token no es válido', 401);
     }
 
     const [user] = await connection.query(
       `SELECT * FROM user WHERE id = ?`,
-      [token.id]
+      [tokenInfo.id]
     );
 
     if (user.length < 1) {
         throw generateError('El token no es válido', 401); // Unauthorized
     }
 
-    req.userId = token.id;
+    req.userAuth = tokenInfo;
 
     next();
   } catch (error) {
