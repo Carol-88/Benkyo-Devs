@@ -1,9 +1,29 @@
 {
   "dependencies": {
+    "autoprefixer": "^10.4.14",
     "eslint": "^8.40.0",
     "eslint-config-next": "^13.4.2",
     "next": "^13.4.2",
+    "postcss": "^8.4.24",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  }
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.3.2"
+  },
+  "name": "benkyo-devs",
+  "description": "App de estudio de lenguajes de programación, basada en flashcards proporcionadas por nuestra propia API.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carol-88/Benkyo-Devs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carol-88/Benkyo-Devs/issues"
+  },
+  "homepage": "https://github.com/Carol-88/Benkyo-Devs#readme"
 }

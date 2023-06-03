@@ -1,23 +1,18 @@
 import { useState } from "react";
 
-const Card = ({ dato }) => {
+const ReverseCard = ({ text }) => {
+  const [reversed, setReversed] = useState(false);
+
+  const handleReverse = () => {
+    setReversed(!reversed);
+  };
+
   return (
-    <section>
-      <h1>{dato.id}</h1>
-      <p>{dato.pregunta}</p>
-      <p>{dato.opciones[1]}</p>
-      <p>{dato.opciones[0]}</p>
-
-      <div
-        className={`card ${isFlipped ? "flipped" : ""}`}
-        onClick={handleClick}
-      >
-        <div className="front">Front Content</div>
-        <div className="back">Back Content</div>
-      </div>
-
-      <button>siguiente Card</button>
-    </>
+    <div className={`card ${reversed ? "reversed" : ""}`}>
+      <p>{text}</p>
+      <button onClick={handleReverse}>Respuesta</button>
+    </div>
   );
 };
-export default Card;
+
+export default ReverseCard;
