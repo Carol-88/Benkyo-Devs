@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CardCopi from "@/components/card/CardCopi";
 import datos from "../../../mocks/questions.json";
 import NextCard from "./button-next-card/next-card";
@@ -30,8 +30,7 @@ const Card = () => {
 };
 
 //Función de animación que se produce despues del cambio de colores
-
-const FlipCard = ({data}) => {
+const FlipCard = ({ data }) => {
   const [flip, setFlip] = useState(false);
   const { reverso } = data;
 
@@ -58,11 +57,11 @@ const FlipCard = ({data}) => {
           <p>{reverso}</p>
         </div>
       ) : (
-            // Front content card
-            <CardCopi data={data} />
-          )}
+        // Front content card
+        <CardCopi data={data} />
+      )}
     </div>
   );
-}
+};
 
-export default {Card, FlipCard};
+export { Card, FlipCard };
