@@ -1,8 +1,3 @@
-/*
-  Recomendación
-  El componente image de Next es una buena opción porque permite optimizar las imágenes
-  documentación: https://nextjs.org/docs/api-reference/next/image
-*/
 import Image from "next/image"
 import { useState } from "react";
 
@@ -30,6 +25,7 @@ const DIFICULTS = [
 ];
 
 const Difficult = () => {
+  // Falta implementar que al seleccionar la dificultad, las cards que aparezcan sean de esa dificultad
 
   const [dificultIdSelected, setDificultIdSelected] = useState(DIFICULTS[0].id)
 
