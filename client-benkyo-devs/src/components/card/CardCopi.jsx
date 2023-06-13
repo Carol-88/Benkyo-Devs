@@ -4,7 +4,10 @@ const COLORS_ACTIONS = {
   success: "bg-green-400",
   error: "bg-red-400",
 };
+
 let color = "bg-white";
+
+// Función que evalua si la respuesta es correcta y cambia el color de las opciones durante dos segundos
 const CardCopiAwser = ({ opcion, respuesta, evaluted, setEvaluted }) => {
   const handleClick = () => {
     setEvaluted(true);
@@ -31,6 +34,37 @@ const CardCopiAwser = ({ opcion, respuesta, evaluted, setEvaluted }) => {
   );
 };
 
+//Función de animación que se produce despues del cambio de colores
+
+
+const FlipCard = () => {
+  const [flip, setFlip] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFlip(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div
+      className={`card ${flip ? 'card-flipped' : ''}`}
+      onClick={() => {
+        // Handle card flip onClick
+      }}
+    >
+      {/* Card content */}
+    </div>
+  );
+}
+
+
+
+// Función que muestra los datos de las cards
 const CardCopi = ({ data }) => {
   if (!data) {
     return <p>Error</p>;
@@ -62,4 +96,4 @@ const CardCopi = ({ data }) => {
   );
 };
 
-export default CardCopi;
+export default {CardCopi, FlipCard};
