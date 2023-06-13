@@ -4,7 +4,8 @@
 			"id": 1,
 			"pregunta": "¿Cuál es el operador para sumar dos números en JavaScript?",
 			"opciones": ["+", "/"],
-			"respuesta": "+"
+			"respuesta": "+",
+			"reverso": "PRUEBA para el efecto reverso"
 		},
 		{
 			"id": 2,
