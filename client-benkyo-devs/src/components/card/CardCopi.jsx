@@ -34,36 +34,6 @@ const CardCopiAwser = ({ opcion, respuesta, evaluted, setEvaluted }) => {
   );
 };
 
-//Función de animación que se produce despues del cambio de colores
-
-
-const FlipCard = () => {
-  const [flip, setFlip] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFlip(true);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  return (
-    <div
-      className={`card ${flip ? 'card-flipped' : ''}`}
-      onClick={() => {
-        // Handle card flip onClick
-      }}
-    >
-      {/* Card content */}
-    </div>
-  );
-}
-
-
-
 // Función que muestra los datos de las cards
 const CardCopi = ({ data }) => {
   if (!data) {
@@ -96,4 +66,4 @@ const CardCopi = ({ data }) => {
   );
 };
 
-export default {CardCopi, FlipCard};
+export default CardCopi;
