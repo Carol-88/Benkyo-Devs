@@ -8,8 +8,7 @@ export default function LoginPage() {
     <>
       <main className='flex justify-center p-3 w-screen'>
         <Registro/>
-        <AboutMe/>
-      </main>
+             </main>
     </>
 
   );

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import CardCopi from "@/components/card/CardCopi";
+import { useState } from "react";
+import CardEval from "./CardEval";
 import datos from "../../../mocks/questions.json";
 import NextCard from "./button-next-card/next-card";
 
@@ -23,45 +23,12 @@ const Card = () => {
 
   return (
     <div className="flex flex-col items-center justify-content p-20">
-      <CardCopi data={data} />
+      <CardEval data={data} />
       <NextCard handleClick={handleNextCard} />
     </div>
   );
 };
 
-//Función de animación que se produce despues del cambio de colores
-const FlipCard = ({ data }) => {
-  const [flip, setFlip] = useState(false);
-  const { reverso } = data;
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFlip(true);
-    }, 2000);
 
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
-  return (
-    <div
-      className={`card ${flip ? 'card-flipped' : ''}`}
-      onClick={() => {
-        setFlip(!flip);
-      }}
-    >
-      {flip ? (
-        // Back content card
-        <div>
-          <p>{reverso}</p>
-        </div>
-      ) : (
-        // Front content card
-        <CardCopi data={data} />
-      )}
-    </div>
-  );
-};
-
-export { Card, FlipCard };
+export default Card;
