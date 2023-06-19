@@ -4,6 +4,8 @@ import { TiArrowRight } from "react-icons/ti";
 
 
 function Points() {
+// Hardcode, hay que implementar la logica
+
         const user = {
         points: {
           easy: 101,
