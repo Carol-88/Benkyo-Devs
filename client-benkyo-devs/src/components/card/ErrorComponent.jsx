@@ -1,6 +1,6 @@
 
 const ErrorComponent = () => {
-    return <p>Oops! Something went wrong.</p>;
+    return <p>Oops! Something went wrong :O.</p>;
   };
 
   export default ErrorComponent
