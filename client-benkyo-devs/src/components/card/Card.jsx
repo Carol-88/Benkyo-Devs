@@ -3,7 +3,7 @@ import CardEval from "./CardEval";
 import datos from "../../../mocks/questions.json";
 import NextCard from "./button-next-card/next-card";
 
-// Función que muestra la card obteniendo los datos de CardCopi, y el botón de next card
+// Función que muestra la card obteniendo los datos de CardEval, y el botón de next card
 const Card = () => {
   const [indexCardCurrent, setIndexCardCurrent] = useState(0);
   const data = datos.faciles[indexCardCurrent];

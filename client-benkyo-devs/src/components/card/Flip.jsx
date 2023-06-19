@@ -1,3 +1,4 @@
+import CardEval from "./CardEval";
 //Función de animación que se produce despues del cambio de colores
 const FlipCard = ({ data }) => {
     const [flip, setFlip] = useState(false);
@@ -27,7 +28,7 @@ const FlipCard = ({ data }) => {
           </div>
         ) : (
           // Front content card
-          <CardCopi data={data} />
+          <CardEval data={data} />
         )}
       </div>
     );
