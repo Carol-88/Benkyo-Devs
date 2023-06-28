@@ -24,4 +24,4 @@ const getConnectionDB = async () => {
     }
 };
 
-module.exports = getConnectionDB;
+module.exports = { getConnectionDB };
