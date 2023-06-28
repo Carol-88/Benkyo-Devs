@@ -1,13 +1,78 @@
 {
 	"info": {
-		"_postman_id": "c6497922-ddb8-4d17-8345-f565018a761e",
+		"_postman_id": "462191d4-8e1a-4d15-ad35-2ab32476644f",
 		"name": "BENKYO",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20815067"
 	},
 	"item": [
 		{
 			"name": "User",
 			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Sandra\",\r\n    \"email\": \"sandra@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}user/register",
+							"host": [
+								"{{endpoint}}user"
+							],
+							"path": [
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "lucas@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "secret",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"sandra@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}user/login",
+							"host": [
+								"{{endpoint}}user"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "Get User",
 					"request": {
@@ -24,7 +89,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": ""
+									"value": "1"
 								}
 							]
 						}
@@ -32,72 +97,51 @@
 					"response": []
 				},
 				{
-					"name": "Login",
+					"name": "Edit user",
 					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"lucas@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token_user_1}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "{{token_user_2}}",
+								"type": "text"
 							}
-						},
-						"url": {
-							"raw": "{{endpoint}}user/login?email=lucas@gmail.com&password=secret",
-							"host": [
-								"{{endpoint}}user"
-							],
-							"path": [
-								"login"
-							],
-							"query": [
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
 								{
-									"key": "email",
-									"value": "lucas@gmail.com"
+									"key": "username",
+									"value": "prueba",
+									"type": "text",
+									"disabled": true
 								},
 								{
-									"key": "password",
-									"value": "secret"
+									"key": "description",
+									"value": "funciona?",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/sandr/Downloads/default (2).jpg"
 								}
 							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Irwing\",\r\n    \"email\": \"irwing@gmail.com\",\r\n    \"password\": \"secret\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
 						},
 						"url": {
-							"raw": "{{endpoint}}user/login?email=lucas@gmail.com&password=secret",
+							"raw": "{{endpoint}}user/edit",
 							"host": [
 								"{{endpoint}}user"
 							],
 							"path": [
-								"login"
-							],
-							"query": [
-								{
-									"key": "email",
-									"value": "lucas@gmail.com"
-								},
-								{
-									"key": "password",
-									"value": "secret"
-								}
+								"edit"
 							]
 						}
 					},
@@ -180,6 +224,43 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "endpoint",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token_user_1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token_user_2",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
