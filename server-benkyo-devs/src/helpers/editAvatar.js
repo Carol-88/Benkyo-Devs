@@ -1,46 +1,46 @@
-const { unlink } = require('fs/promises');
+const fs = require('fs/promises');
 const path = require('path');
 const sharp = require('sharp');
-const uuid = require('uuid');
+const { v4: uuid } = require('uuid');
 
-const imagesDir = path.join(__filename, '../../../static/');
-
-async function deleteAvatar(imageName) {
+const saveAvatar = async (image) => {
+    const uploadsPath = path.join(__dirname, '..', process.env.UPLOADS_DIR);
     try {
-        let photoPath;
-
-        photoPath = path.join(imagesDir, imageName)
-
-        console.log(photoPath);
-
-        await unlink(photoPath);
-    } catch (error) {
-        throw new Error('Error al procesar la imagen del servidor');
+        await fs.access(uploadsPath);
+    } catch {
+        await fs.mkdir(uploadsPath);
     }
-}
 
-async function saveAvatar(image) {
+    const sharpImage = sharp(image.data);
 
+    sharpImage.resize(300);
+
+    const imageName = `${uuid()}.jpg`;
+
+    const imagePath = path.join(uploadsPath, imageName);
+
+    await sharpImage.toFile(imagePath);
+
+    return imageName;
+};
+
+const deleteAvatar = async (imageName) => {
     try {
-        const sharpImage = sharp(image.data);
-        
-        const imageName = uuid.v4() + '.jpg';
+        const imagePath = path.join(__dirname, '..', process.env.UPLOADS_DIR, imageName);
+        try {
+            await fs.access(imagePath);
+        } catch (error) {
+            console.error('access error:', error);
+            return;
+        }
 
-        let photoPath;
-        
-        photoPath = path.join(imagesDir, imageName);
-
-        sharpImage.resize(150, 150);
-
-        sharpImage.toFile(photoPath);
-
-        return imageName;
+        await fs.unlink(imagePath);
     } catch (error) {
-        throw new Error('Error al procesar la imagen del servidor');
+        generateError('Error al eliminar la imagen del servidor');
     }
-}
-
+};
 
 module.exports = {
-    deleteAvatar, saveAvatar
-}
+    saveAvatar,
+    deleteAvatar,
+};
