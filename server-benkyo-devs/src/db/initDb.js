@@ -1,31 +1,31 @@
 require('dotenv').config();
 
-const { getConnection } = require('./db');
+const { getConnectionDB } = require('./db');
 
 async function main() {
     let connection;
 
     try {
-        connection = await getConnection();
+        connection = await getConnectionDB();
 
         console.log('Borrando base de datos');
 
-        await connection.query('DROP DATABASE IF EXISTS benkyo')
+        await connection.query('DROP DATABASE IF EXISTS benkyo');
 
         console.log('Creando base de datos...');
 
-        await connection.query('CREATE DATABASE benkyo')
+        await connection.query('CREATE DATABASE benkyo');
 
         console.log('Usando base de datos...');
 
-        await connection.query('USE benkyo')
+        await connection.query('USE benkyo');
 
         console.log('Creando tabla USER');
 
         await connection.query(`
             CREATE TABLE IF NOT EXISTS user (
                 id int not null auto_increment primary key,
-                name varchar(50) not null,
+                name varchar(50),
                 username varchar(30) not null,
                 description varchar (500),
                 avatar varchar(255),
@@ -101,13 +101,11 @@ async function main() {
                 foreign key(id_user) references user(id) ON UPDATE CASCADE,
                 foreign key(id_deck) references deck(id) ON UPDATE CASCADE
             );        
-        `); 
-
-    } catch(error) {
+        `);
+    } catch (error) {
         console.error(error);
-
     } finally {
-        if(connection) connection.release();
+        if (connection) connection.release();
         process.exit();
     }
 }
