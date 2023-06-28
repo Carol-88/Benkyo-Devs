@@ -4,43 +4,34 @@ const { generateError } = require('../src/helpers/generateError');
 require('dotenv').config();
 
 const userAuth = async (req, res, next) => {
-  let connection;
+    let connection;
 
-  try {
-    connection = await getConnection();
-    
-    const { authorization } = req.headers;
-
-    if (!authorization) {
-      throw generateError('Header Authorization Missing', 401);
-    }
-
-    let tokenInfo;
-   
     try {
-      tokenInfo = jwt.verify(authorization, process.env.SECRET);
-    } catch {
-      throw generateError('El token no es válido', 401);
+        connection = await getConnection();
+
+        const { authorization } = req.headers;
+
+        if (!authorization) {
+            throw generateError('Falta cabecera de autenticación', 401);
+        }
+
+        let tokenInfo;
+
+        try {
+            tokenInfo = jwt.verify(authorization, process.env.SECRET);
+        } catch (error) {
+            console.error(error);
+            throw generateError('El token no es válido', 401);
+        }
+
+        req.user = tokenInfo;
+
+        next();
+    } catch (error) {
+        next(error);
+    } finally {
+        if (connection) connection.release();
     }
-
-    const [user] = await connection.query(
-      `SELECT * FROM user WHERE id = ?`,
-      [tokenInfo.id]
-    );
-
-    if (user.length < 1) {
-        throw generateError('El token no es válido', 401); // Unauthorized
-    }
-
-    req.userAuth = tokenInfo;
-
-    next();
-  } catch (error) {
-    next(error);
-  }
-  finally {
-    if (connection) connection.release();
-  }
 };
 
 module.exports = {
